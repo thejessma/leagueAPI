@@ -1,7 +1,0 @@
-virtualenv venv –distribute
-
-source venv/bin/activate
-
-sudo pip install Flask
-
-“sudo pip install” anything else you need (Flask-OAuth, Flask-Mail, etc.)
