@@ -269,6 +269,10 @@ def champion_page(champion_id):
 	else:
 		return render_template('champion_page.html', indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg14 = itemImg14)
 
+@app.route("/riot.txt")
+def riot():
+	return render_template("riot.txt")
+
 #----------------------------------------
 # launch
 #----------------------------------------
