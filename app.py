@@ -260,9 +260,9 @@ def champion_page(champion_id):
 	itemImg11 = []
 	itemImg14 = []
 	for i in range(5):
-		itemImg11.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict11["items"][i]["item"]) + ".png")
+		itemImg11.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict11[champion_id]["items"][i]["item"]) + ".png")
 	for i in range(5):
-		itemImg14.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict14["items"][i]["item"]) + ".png")
+		itemImg14.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict14[champion_id]["items"][i]["item"]) + ".png")
 
 	if champion_id in indexDict11:
 		return render_template('champion_page.html', indexDict11 = indexDict11[champion_id], indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg11 = itemImg11, itemImg14 = itemImg14)
