@@ -1,20 +1,9 @@
 from __future__ import division
-import os
-from flask import Flask, render_template, send_from_directory
 import json
 import urllib2
 
-#----------------------------------------
-# initialization
-#----------------------------------------
-
-app = Flask(__name__)
-
-app.config.update(
-    DEBUG = True,
-)
-
-k = 1
+##define patch number
+k = 0
 
 data = []
 dataItem = {}
@@ -214,69 +203,4 @@ def main():
 			indexDict[i]["items"] = itemChoiceByChampion(data[i]["players"])
 	return indexDict
 
-def convert(indexDict):
-	for i in indexDict:
-		indexDict[i]["coordinate"]["x"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["x"])
-		indexDict[i]["coordinate"]["y"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["y"])
-		indexDict[i]["win"] = '{0:.3g}'.format(indexDict[i]["win"] * 100)
-		indexDict[i]["kills"] = '{0:.3g}'.format(indexDict[i]["kills"])
-		for j in indexDict[i]["items"]:
-			indexDict[i]["items"][j]["stats"] = '{0:.3g}'.format(indexDict[i]["items"][j]["stats"])
-	return indexDict
-
-
-#----------------------------------------
-# controllers
-#----------------------------------------
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'ico/favicon.ico')
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
-
-@app.route("/")
-def index():
-	with open('indexData.json', "r") as f:
-		indexDict11 = json.loads(f.read())
-		indexDict11 = convert(indexDict11)
-	with open('indexData14.json', "r") as f:
-		indexDict14 = json.loads(f.read())
-		indexDict14 = convert(indexDict14)
-	return render_template('index.html', indexDict11 = indexDict11, indexDict14 = indexDict14)
-
-@app.route("/champion_page/<champion_id>")
-def champion_page(champion_id):
-	with open('indexData.json', "r") as f:
-		indexDict11 = json.loads(f.read())
-		indexDict11 = convert(indexDict11)
-	with open('indexData14.json', "r") as f:
-		indexDict14 = json.loads(f.read())
-		indexDict14 = convert(indexDict14)
-	championData = json.load(urllib2.urlopen("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/"+str(champion_id)+"?api_key=98d79efb-f067-465a-b246-50c65eac27e8"))
-	championImg = "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + str(championData["key"]) + "_0.jpg"
-	itemImg11 = []
-	itemImg14 = []
-	for i in range(5):
-		itemImg11.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict11["items"][i]["item"]) + ".png")
-	for i in range(5):
-		itemImg14.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict14["items"][i]["item"]) + ".png")
-
-	if champion_id in indexDict11:
-		return render_template('champion_page.html', indexDict11 = indexDict11[champion_id], indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg11 = itemImg11, itemImg14 = itemImg14)
-	else:
-		return render_template('champion_page.html', indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg14 = itemImg14)
-
-#----------------------------------------
-# launch
-#----------------------------------------
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
-
-
-
-
+main()

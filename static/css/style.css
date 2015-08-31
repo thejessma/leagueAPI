@@ -165,3 +165,21 @@ a{
 .col_data{
 	text-align: right;
 }
+
+.items_container{
+	width:30vw;
+	text-align: left;
+}
+
+.item{
+	display: inline-block;
+}
+
+.item_img{
+	width:100%;
+	height:100%;
+}
+
+.item_stats{
+	text-align: center
+}

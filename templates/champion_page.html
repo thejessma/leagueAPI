@@ -56,18 +56,30 @@
 					<tr>
 						<td> WIN RATE:
 						</td>
-						<td class="col_data">  {{ indexDict11["win"] }} %
+						<td class="col_data">  {{ indexDict11["win"] }} 
 						</td>
 					</tr>
 
-					<tr>
-						<td> TOP ITEM:
-						</td>
-						<td class="col_data">  
-						</td>
-					</tr>
 
 				</table>
+
+				TOP ITEM:
+
+				<div class="items_container">
+
+					{% for i in range(5) %}<div class="item">
+
+							<img class="item_img" src="{{ itemImg11[i] }}">
+
+							<div class="item_stats">
+
+								{{ indexDict11["items"][i]["stats"]}}
+
+							</div>
+
+						</div>{% endfor %}
+						
+				</div>
 
 			</div>
 
@@ -114,13 +126,27 @@
 						</td>
 					</tr>
 
-					<tr>
-						<td> TOP ITEM:
-						</td>
-						<td class="col_data">  
-						</td>
-					</tr>
 				</table>
+
+
+				TOP ITEM:
+
+				<div class="items_container">
+
+					{% for i in range(5) %}<div class="item">
+
+							<img class="item_img" src="{{ itemImg14[i] }}">
+
+							<div class="item_stats">
+
+								{{ indexDict14["items"][i]["stats"]}}
+
+							</div>
+
+						</div>{% endfor %}
+						
+				</div>
+
 
 			</div>
 
