@@ -1,9 +1,171 @@
 {% extends "base.html" %}
 {% block title %} - Home{% endblock %}
 {% block content %}
-{% if not session.logged_in %}
-     <p>You are not logged in.</p>
-{% else %}
-     <p>You are logged in.</p>
-{% endif %}
+
+<a href="{{ url_for('index') }}">
+<div class="header"> 
+	Ability Utility Calculator 
+</div>
+</a>
+
+<div class="toggle">
+
+	<div id = "btn11" class="version btn11">
+
+    	Patch 5.11
+
+    </div><div id="btn14" class="version btn14">
+
+    	Patch 5.14
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div id="chart_div" style="display: inline-block; width: 900px; height: 500px;"></div>
+
+</div>
+
+    <script type="text/javascript">
+	    google.load("visualization", "1", {packages:["corechart"]});
+	    google.setOnLoadCallback(drawChart);
+
+	    var current = 0;
+
+	    function drawChart() {
+
+			var data = new Array(
+	        	google.visualization.arrayToDataTable([
+
+	        		['ID', 'Utility', 'Ability Power', 'Build', 'Win', 'ID'],
+
+	        		{% for k, v in indexDict11.iteritems() %}
+	        			[ "{{ v['name'] }}", {{ v['coordinate']['x'] }}, {{ v['coordinate']['y']}}, "{{v['role']}}", {{v['win']}}, {{k}}],
+	        		{% endfor %}
+
+	        	]),
+
+	        	google.visualization.arrayToDataTable([
+
+		        	['ID', 'Utility', 'Ability Power', 'Build', 'Win', "ID"],
+
+		        	{% for k, v in indexDict14.iteritems() %}
+		        		[ "{{ v['name'] }}", {{ v['coordinate']['x'] }}, {{ v['coordinate']['y']}}, "{{v['role']}}", {{v['win']}}, {{k}}],
+		        	{% endfor %}
+
+	        	]));
+	        
+	        var options = {
+	        	hAxis: {title: 'Utility Units', minValue: 0, maxValue: 175},
+	        	vAxis: {title: 'Ability Power', minValue: 0, maxValue: 350},
+	        	legend: 'none',
+	        	backgroundColor: 'transparent',
+	        	animation: {
+	            	duration: 1000,
+	            	easing: "out"
+	          	},
+	          	tooltip: { isHtml: true },
+	          	chartArea: {width: '80%', height: '75%'},
+	          	sizeAxis: {minSize: 0.5, maxSize: 20},
+	          	series: { "AP" : {color: '#2E8BB2'}, "UTIL" : {color: '#FF7188'}},
+	          	bubble: {
+	          		textStyle: {
+	          			fontSize: 6,
+	          			color:"#fff"
+	          		}
+	          	}
+	        };
+
+	        var chart = new google.visualization.BubbleChart(document.getElementById('chart_div'));
+	        var button11 = document.getElementById('btn11');
+	        var button14 = document.getElementById('btn14');
+
+	       	function selectHandler() {
+	         	var champID = 0;
+			    var selection = chart.getSelection();
+			    for (var i = 0; i < selection.length; i++) {
+				   	var item = selection[i];
+				    champID = data[current].getValue(item.row, 5)
+				};
+				var url = "{{ url_for('champion_page', champion_id='champID') }}";
+				url = url.replace("champID", champID);
+				window.location.href = url;
+			};
+
+			google.visualization.events.addListener(chart, 'select', selectHandler);
+			google.visualization.events.addListener(chart, 'onmouseover', cursorHandler);
+			google.visualization.events.addListener(chart, 'onmouseout', cursorHandlerOff);
+
+	        function drawAgain() {
+	        	button11.disabled = true;
+	          	button14.disabled = true;
+	          	google.visualization.events.addListener(chart, 'ready',
+	          	function() {
+	            	button11.disabled = false;
+	            	button14.disabled = false;
+	            });
+	          
+	        	chart.draw(data[current], options);
+	        };
+	        
+	        drawAgain();
+
+	        function cursorHandler() {
+	        	console.log("print");
+	        	$("#chart_div").css('cursor', 'pointer')
+	        };
+
+	        function cursorHandlerOff() {
+	        	$("#chart_div").css('cursor', 'default')
+	        };
+
+	        button14.onclick = function() {
+	         	current = 1;
+	          	clickButton(button14);
+	          	removeButton(button11)
+	        };
+
+	        button11.onclick = function() {
+	          	current = 0;
+	          	clickButton(button11);
+	          	removeButton(button14)
+	        };
+
+	        button14.hover = function() {
+	          	hoverButton(button14)
+	        }
+
+	        button11.hover = function() {
+	          	hoverButton(button11)
+	        }
+
+	        function clickButton(button) {
+	          	hoverButton(button)
+	          	drawAgain();
+	        }
+
+	    };
+
+	     
+	    function hoverButton(buttonDark) {
+	        buttonDark.style.background = '#545454'
+	        buttonDark.style.color = '#fff'
+	          
+	    };
+
+	    function removeButton(buttonLight) {
+	        buttonLight.style.background = ''
+	        buttonLight.style.color = ''
+	    };
+
+
+	    function tooltipContent(name, kills, win, role) {
+	        return '<div class="tooltip">' + '<div class="tooltipHead">' + name + '</div>' + "Kills: " + kills + '</br>' + "Wins: " + win + '</br>' + "Role: " + role + '</div>' 
+
+	    };
+
+    </script>
+
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} - {{ indexDict14["name"] }} {% endblock %}
+{% block content %}
+
+
+<div class="champion_bkgd">
+	<img class="champion_img" src="{{ championImg}}">
+	<div class="champion_title">
+		{{ indexDict14["name"] }} 
+	</div>
+	<div class="bkgd_overlay">
+
+	</div>
+</div>
+
+
+
+<br>
+
+KILLS: {{ indexDict14["kills"] }}
+
+<br>
+
+WIN RATE: {{ indexDict14["win"] }}
+
+<br>
+
+
+{% endblock %}

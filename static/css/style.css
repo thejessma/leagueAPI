@@ -1,0 +1,98 @@
+body {
+	font-family: Avenir Next;
+	color:#2C3E50;
+	background-color: #ECF0F1;
+	margin:0;
+	padding:0;
+	text-align: center
+}
+
+.container{
+	color:#2C3E50;
+}
+
+a{
+	text-decoration: none;
+}
+
+.header{
+	font-weight: 100;
+	font-size: 3em;
+	margin-right:2vw;
+	margin-left:2vw;
+	margin-top:2vh;
+	text-align: center;
+	color: #2C3E50;
+
+}
+
+.toggle{
+	text-align: center;
+	margin-top:20px;
+}
+
+.version{
+	border: 1px #545454 solid;
+	color:#545454;
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-left:50px;
+	padding-right:50px;
+	display: inline-block;
+	transition: all 0.1s ease-in;
+}
+
+.version:hover{
+	cursor: pointer;
+	background-color: #545454;
+	color:#fff;
+	border:#545454 1px solid;
+}
+
+.btn11{
+	border-radius: 10px 0px 0px 10px;
+}
+
+.btn14{
+	border-radius: 0px 10px 10px 0px;
+	margin-left:-1px;
+}
+
+
+/*---------------Champion Page------------------*/
+
+.champion_bkgd {
+	overflow: hidden;
+	width:100vw;
+	height:40vh;
+	position: relative;
+	top:0;
+	left:0;
+	z-index: 0;
+
+}
+
+.champion_img{
+	width:100%;
+}
+
+.champion_title{
+	color:#fff;
+	font-size: 5em;
+	font-weight: 100;
+	position: absolute;
+	bottom:0;
+	z-index: 2;
+	left:20vw;
+}
+
+.bkgd_overlay{
+	position: absolute;
+	bottom:0;
+	left:0;
+	width:100vw;
+	height:30vh;
+	z-index: 1;
+	background: -webkit-linear-gradient(transparent, #000)
+
+}
