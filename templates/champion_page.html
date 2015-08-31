@@ -2,28 +2,134 @@
 {% block title %} - {{ indexDict14["name"] }} {% endblock %}
 {% block content %}
 
+<div class="champion_page">
 
-<div class="champion_bkgd">
-	<img class="champion_img" src="{{ championImg}}">
-	<div class="champion_title">
-		{{ indexDict14["name"] }} 
+
+	<div class="champion_bkgd">
+		<img class="champion_img" src="{{ championImg}}">
+		<div class="champion_title">
+			{{ indexDict14["name"] }} 
+		</div>
+		<div class="bkgd_overlay">
+
+		</div>
 	</div>
-	<div class="bkgd_overlay">
+
+	<div class="table_container">
+
+		<div class="table_col col11">
+
+			<div class="col_title title11"> 
+				5.11
+			</div>
+
+			<div class="col_content">
+
+				<table class="col_table"> 
+					<tr> 
+						<td> BUILD TYPE:
+						</td>
+						<td class="col_data"> {{ indexDict11["role"]}}
+						</td>
+					</tr> 
+					<tr> 
+						<td> ABILITY POWER:
+						</td>
+						<td class="col_data"> {{ indexDict11["coordinate"]["y"]}}
+						</td>
+					</tr> 
+
+					<tr>
+						<td> UTILITY:
+						</td>
+						<td class="col_data"> {{ indexDict11["coordinate"]["x"]}}
+						</td>
+					</tr>
+
+					<tr> 
+						<td> KILLS:
+						</td>
+						<td class="col_data">  {{ indexDict11["kills"] }}
+						</td>
+					</tr> 
+
+					<tr>
+						<td> WIN RATE:
+						</td>
+						<td class="col_data">  {{ indexDict11["win"] }} %
+						</td>
+					</tr>
+
+					<tr>
+						<td> TOP ITEM:
+						</td>
+						<td class="col_data">  
+						</td>
+					</tr>
+
+				</table>
+
+			</div>
+
+		</div><div class="table_col col14">
+
+			<div class="col_title title14">
+				5.14
+			</div>
+
+			<div class="col_content">
+
+				<table class= "col_table">
+					<tr> 
+						<td> BUILD TYPE:
+						</td>
+						<td class="col_data"> {{ indexDict14["role"]}}
+						</td>
+					</tr> 
+					<tr> 
+						<td> ABILITY POWER:
+						</td>
+						<td class="col_data"> {{ indexDict14["coordinate"]["y"]}}
+						</td>
+					</tr> 
+
+					<tr>
+						<td> UTILITY:
+						</td>
+						<td class="col_data"> {{ indexDict14["coordinate"]["x"]}}
+						</td>
+					</tr>
+
+					<tr> 
+						<td> KILLS:
+						</td>
+						<td class="col_data">  {{ indexDict14["kills"] }}
+						</td>
+					</tr> 
+
+					<tr>
+						<td> WIN RATE:
+						</td>
+						<td class="col_data">  {{ indexDict14["win"] }} %
+						</td>
+					</tr>
+
+					<tr>
+						<td> TOP ITEM:
+						</td>
+						<td class="col_data">  
+						</td>
+					</tr>
+				</table>
+
+			</div>
+
+		</div>
 
 	</div>
+
 </div>
 
-
-
-<br>
-
-KILLS: {{ indexDict14["kills"] }}
-
-<br>
-
-WIN RATE: {{ indexDict14["win"] }}
-
-<br>
 
 
 {% endblock %}

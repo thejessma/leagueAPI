@@ -214,6 +214,15 @@ def main():
 			indexDict[i]["items"] = itemChoiceByChampion(data[i]["players"])
 	return indexDict
 
+def convert(indexDict):
+	for i in indexDict:
+		indexDict[i]["coordinate"]["x"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["x"])
+		indexDict[i]["coordinate"]["y"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["y"])
+		indexDict[i]["win"] = '{0:.3g}'.format(indexDict[i]["win"] * 100)
+		indexDict[i]["kills"] = '{0:.3g}'.format(indexDict[i]["kills"])
+	return indexDict
+
+
 #----------------------------------------
 # controllers
 #----------------------------------------
@@ -230,16 +239,20 @@ def page_not_found(e):
 def index():
 	with open('indexData.json', "r") as f:
 		indexDict11 = json.loads(f.read())
+		indexDict11 = convert(indexDict11)
 	with open('indexData14.json', "r") as f:
 		indexDict14 = json.loads(f.read())
+		indexDict14 = convert(indexDict14)
 	return render_template('index.html', indexDict11 = indexDict11, indexDict14 = indexDict14)
 
 @app.route("/champion_page/<champion_id>")
 def champion_page(champion_id):
 	with open('indexData.json', "r") as f:
 		indexDict11 = json.loads(f.read())
+		indexDict11 = convert(indexDict11)
 	with open('indexData14.json', "r") as f:
 		indexDict14 = json.loads(f.read())
+		indexDict14 = convert(indexDict14)
 	championData = json.load(urllib2.urlopen("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/"+str(champion_id)+"?api_key=98d79efb-f067-465a-b246-50c65eac27e8"))
 	championImg = "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + str(championData["key"]) + "_0.jpg"
 	if champion_id in indexDict11:

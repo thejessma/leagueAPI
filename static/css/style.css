@@ -61,6 +61,11 @@ a{
 
 /*---------------Champion Page------------------*/
 
+
+.champion_page{
+	text-align: center
+}
+
 .champion_bkgd {
 	overflow: hidden;
 	width:100vw;
@@ -95,4 +100,68 @@ a{
 	z-index: 1;
 	background: -webkit-linear-gradient(transparent, #000)
 
+}
+
+.table_container{
+	margin-top: 5vh;
+	margin-bottom:5vh;
+	width:80vw;
+	display: inline-block;
+	position: relative;
+	top:0;
+	left:0;
+}
+
+.table_col{
+	margin:0;
+	padding-top:2vh;
+	padding-bottom:2vh;
+	position: absolute;
+	top:0;
+	width:40vw;
+	text-align: left;
+	margin-bottom:5vh;
+}
+
+.col11{
+	left:0;
+	background-color: #ffb4d9;
+	border-radius: 10px 0px 0px 10px;
+}
+
+.col14{
+	right:0;
+	background-color: #b4d9ff;
+	border-radius: 0px 10px 10px 0px;
+}
+
+.col_title{
+	position: absolute;
+	top:0;
+	font-size: 5em;
+	font-weight: 500;
+	opacity: 0.3;
+}
+
+.title11{
+	left:0;
+}
+
+.title14{
+	right:0;
+}
+
+.col_content{
+	font-size: 1.5em;
+	margin-top:10vh;
+	margin-left:5vw;
+	margin-bottom:5vh;
+}
+
+.col_table{
+	width:30vw;
+}
+
+.col_data{
+	text-align: right;
 }
