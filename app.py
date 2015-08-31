@@ -220,8 +220,8 @@ def convert(indexDict):
 		indexDict[i]["coordinate"]["y"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["y"])
 		indexDict[i]["win"] = '{0:.3g}'.format(indexDict[i]["win"] * 100)
 		indexDict[i]["kills"] = '{0:.3g}'.format(indexDict[i]["kills"])
-		for j in indexDict[i]["items"]:
-			indexDict[i]["items"][j]["stats"] = '{0:.3g}'.format(indexDict[i]["items"][j]["stats"])
+#		for j in indexDict[i]["items"]:
+#			indexDict[i]["items"][j]["stats"] = '{0:.3g}'.format(indexDict[i]["items"][j]["stats"])
 	return indexDict
 
 
