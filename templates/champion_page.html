@@ -193,34 +193,34 @@
 
 	if ({{ indexDict11["coordinate"]["y"] }} > {{ indexDict14["coordinate"]["y"] }}) {
 		document.getElementById("ap11").style.color = "#008b52"
-		document.getElementById("ap14").style.color = "#8b0000"
+		document.getElementById("ap14").style.color = "#c70210"
 	} else {
 		document.getElementById("ap14").style.color = "#008b52"
-		document.getElementById("ap11").style.color = "#8b0000"
+		document.getElementById("ap11").style.color = "#c70210"
 	}
 
 	if ({{ indexDict11["coordinate"]["x"] }} > {{ indexDict14["coordinate"]["x"] }}) {
 		document.getElementById("util11").style.color = "#008b52"
-		document.getElementById("util14").style.color = "#8b0000"
+		document.getElementById("util14").style.color = "#c70210"
 	} else {
 		document.getElementById("util14").style.color = "#008b52"
-		document.getElementById("util11").style.color = "#8b0000"
+		document.getElementById("util11").style.color = "#c70210"
 	}
 
 	if ({{ indexDict11["win"] }} > {{ indexDict14["win"] }}) {
 		document.getElementById("win11").style.color = "#008b52"
-		document.getElementById("win14").style.color = "#8b0000"
+		document.getElementById("win14").style.color = "#c70210"
 	} else {
 		document.getElementById("win14").style.color = "#008b52"
-		document.getElementById("win11").style.color = "#8b0000"
+		document.getElementById("win11").style.color = "#c70210"
 	}
 
 	if ({{ indexDict11["kills"] }} > {{ indexDict14["kills"] }}) {
 		document.getElementById("kills11").style.color = "#008b52"
-		document.getElementById("kills14").style.color = "#8b0000"
+		document.getElementById("kills14").style.color = "#c70210"
 	} else {
 		document.getElementById("kills14").style.color = "#008b52"
-		document.getElementById("kills11").style.color = "#8b0000"
+		document.getElementById("kills11").style.color = "#c70210"
 	}
 {% else %}
 	if ("{{ indexDict14["role"] }}" == "AP") {
