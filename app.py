@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, send_from_directory
 import json
 import urllib2
+from operator import itemgetter
 
 #----------------------------------------
 # initialization
@@ -218,11 +219,14 @@ def convert(indexDict):
 	for i in indexDict:
 		indexDict[i]["coordinate"]["x"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["x"])
 		indexDict[i]["coordinate"]["y"] = '{0:.3g}'.format(indexDict[i]["coordinate"]["y"])
-		indexDict[i]["win"] = '{0:.3g}'.format(indexDict[i]["win"] * 100)
+		percent = indexDict[i]["win"]*100
+		indexDict[i]["win"] = '{0:.3g}'.format(percent) 
 		indexDict[i]["kills"] = '{0:.3g}'.format(indexDict[i]["kills"])
-		for j in range(len(indexDict[i]["items"])):
-			#newlist = sorted(indexDict[i]["items"], key=itemgetter('stats')) 
-			indexDict[i]["items"][j]["stats"] = '{0:.2g}'.format(indexDict[i]["items"][j]["stats"] * 100)
+		newlist = sorted(indexDict[i]["items"], key=itemgetter('stats'), reverse=True) 
+		indexDict[i]["items"] = newlist
+		for j in range(len(indexDict[i]["items"])):		
+			percent = indexDict[i]["items"][j]["stats"]*100
+			indexDict[i]["items"][j]["stats"] = '{0:.2g}'.format(percent)
 	return indexDict
 
 
@@ -260,12 +264,12 @@ def champion_page(champion_id):
 	championImg = "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + str(championData["key"]) + "_0.jpg"
 	itemImg11 = []
 	itemImg14 = []
-	for i in range(5):
-		itemImg11.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict11[champion_id]["items"][i]["item"]) + ".png")
-	for i in range(5):
+	for i in range(min(5, len(indexDict14[champion_id]["items"]))):
 		itemImg14.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict14[champion_id]["items"][i]["item"]) + ".png")
-
+		
 	if champion_id in indexDict11:
+		for i in range(min(5, len(indexDict14[champion_id]["items"]))):
+			itemImg11.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict11[champion_id]["items"][i]["item"]) + ".png")
 		return render_template('champion_page.html', indexDict11 = indexDict11[champion_id], indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg11 = itemImg11, itemImg14 = itemImg14)
 	else:
 		return render_template('champion_page.html', indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg14 = itemImg14)

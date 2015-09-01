@@ -7,6 +7,12 @@
 
 	<div class="champion_bkgd">
 		<img class="champion_img" src="{{ championImg}}">
+
+		<a href="{{ url_for('index') }}">
+		<div class="back">
+			Back
+		</div>
+		</a>
 		<div class="champion_title">
 			{{ indexDict14["name"] }} 
 		</div>
@@ -25,55 +31,59 @@
 
 			<div class="col_content">
 
+				{% if indexDict11 is defined %}
+
 				<table class="col_table"> 
+
+				
 					<tr> 
-						<td> BUILD TYPE:
+						<td class="buildtype"> Build Type
 						</td>
-						<td class="col_data"> {{ indexDict11["role"]}}
+						<td id="build11" class="col_data buildtype"> {{ indexDict11["role"]}}
 						</td>
 					</tr> 
 					<tr> 
-						<td> ABILITY POWER:
+						<td> Ability Power
 						</td>
-						<td class="col_data"> {{ indexDict11["coordinate"]["y"]}}
+						<td id="ap11" class="col_data"> {{ indexDict11["coordinate"]["y"]}}
 						</td>
 					</tr> 
 
 					<tr>
-						<td> UTILITY:
+						<td> Utility
 						</td>
-						<td class="col_data"> {{ indexDict11["coordinate"]["x"]}}
+						<td id="util11" class="col_data"> {{ indexDict11["coordinate"]["x"]}}
 						</td>
 					</tr>
 
 					<tr> 
-						<td> KILLS:
+						<td> Kills
 						</td>
-						<td class="col_data">  {{ indexDict11["kills"] }}
+						<td id="kills11" class="col_data">  {{ indexDict11["kills"] }}
 						</td>
 					</tr> 
 
 					<tr>
-						<td> WIN RATE:
+						<td> Win Rate
 						</td>
-						<td class="col_data">  {{ indexDict11["win"] }} 
+						<td id="win11" class="col_data">  {{ indexDict11["win"] }}% 
 						</td>
 					</tr>
 
 
 				</table>
 
-				TOP ITEMS:
+				Top Items
 
-				<div class="items_container">
+				<div class="items_container" style="text-align: right">
 
-					{% for i in range(5) %}<div class="item">
+					{% for i in range(itemImg11 | length) %}<div class="item">
 
 							<img class="item_img" src="{{ itemImg11[i] }}">
 
 							<div class="item_stats">
 
-								{{ indexDict11["items"][i]["stats"]}}
+								{{ indexDict11["items"][i]["stats"]}}%
 
 							</div>
 
@@ -81,7 +91,14 @@
 						
 				</div>
 
+				{% else %}
+				
+				No documented use of AP Items
+
+				{% endif %}
+
 			</div>
+			
 
 		</div><div class="table_col col14">
 
@@ -91,55 +108,55 @@
 
 			<div class="col_content">
 
-				<table class= "col_table">
+				<table  class= "col_table">
 					<tr> 
-						<td> BUILD TYPE:
+						<td id="build14" class="buildtype"> {{ indexDict14["role"]}}
 						</td>
-						<td class="col_data"> {{ indexDict14["role"]}}
+						<td class="col_data buildtype"> Build Type
 						</td>
 					</tr> 
 					<tr> 
-						<td> ABILITY POWER:
+						<td id="ap14"> {{ indexDict14["coordinate"]["y"]}}
 						</td>
-						<td class="col_data"> {{ indexDict14["coordinate"]["y"]}}
+						<td  class="col_data"> Ability Power
 						</td>
 					</tr> 
 
 					<tr>
-						<td> UTILITY:
+						<td id="util14">  {{ indexDict14["coordinate"]["x"]}}
 						</td>
-						<td class="col_data"> {{ indexDict14["coordinate"]["x"]}}
+						<td  class="col_data "> Utility
 						</td>
 					</tr>
 
 					<tr> 
-						<td> KILLS:
+						<td id="kills14" > {{ indexDict14["kills"] }}
 						</td>
-						<td class="col_data">  {{ indexDict14["kills"] }}
+						<td class="col_data ">  Kills
 						</td>
 					</tr> 
 
 					<tr>
-						<td> WIN RATE:
+						<td id="win14" > {{ indexDict14["win"] }}%
 						</td>
-						<td class="col_data">  {{ indexDict14["win"] }} %
+						<td class="col_data ">  Win Rate
 						</td>
 					</tr>
 
 				</table>
 
 
-				TOP ITEMS:
+				<div class="item_title"> Top Items </div>
 
 				<div class="items_container">
 
-					{% for i in range(5) %}<div class="item">
+					{% for i in range(itemImg14 | length) %}<div class="item">
 
 							<img class="item_img" src="{{ itemImg14[i] }}">
 
 							<div class="item_stats">
 
-								{{ indexDict14["items"][i]["stats"]}}
+								{{ indexDict14["items"][i]["stats"]}}%
 
 							</div>
 
@@ -156,6 +173,67 @@
 
 </div>
 
+<script type="text/javascript">
+
+{% if indexDict11 is defined %}
+	if ("{{ indexDict11["role"] }}" == "AP") {
+		document.getElementById("build11").style.color = "#ff50a6"
+	} else {
+		document.getElementById("build11").style.color = "#50a1ff"
+	}
+
+	if ("{{ indexDict14["role"] }}" == "AP") {
+		document.getElementById("build14").style.color = "#ff50a6"
+	} else {
+		document.getElementById("build14").style.color = "#50a1ff"
+	}
+
+	if ({{ indexDict11["coordinate"]["y"] }} > {{ indexDict14["coordinate"]["y"] }}) {
+		document.getElementById("ap11").style.color = "#008b52"
+		document.getElementById("ap14").style.color = "#8b0000"
+	} else {
+		document.getElementById("ap14").style.color = "#008b52"
+		document.getElementById("ap11").style.color = "#8b0000"
+	}
+
+	if ({{ indexDict11["coordinate"]["x"] }} > {{ indexDict14["coordinate"]["x"] }}) {
+		document.getElementById("util11").style.color = "#008b52"
+		document.getElementById("util14").style.color = "#8b0000"
+	} else {
+		document.getElementById("util14").style.color = "#008b52"
+		document.getElementById("util11").style.color = "#8b0000"
+	}
+
+	if ({{ indexDict11["win"] }} > {{ indexDict14["win"] }}) {
+		document.getElementById("win11").style.color = "#008b52"
+		document.getElementById("win14").style.color = "#8b0000"
+	} else {
+		document.getElementById("win14").style.color = "#008b52"
+		document.getElementById("win11").style.color = "#8b0000"
+	}
+
+	if ({{ indexDict11["kills"] }} > {{ indexDict14["kills"] }}) {
+		document.getElementById("kills11").style.color = "#008b52"
+		document.getElementById("kills14").style.color = "#8b0000"
+	} else {
+		document.getElementById("kills14").style.color = "#008b52"
+		document.getElementById("kills11").style.color = "#8b0000"
+	}
+{% else %}
+	if ("{{ indexDict14["role"] }}" == "AP") {
+		document.getElementById("build14").style.color = "#8b0000"
+	} else {
+		document.getElementById("build14").style.color = "#008b52"
+	}
+	document.getElementById("ap14").style.color = "#008b52"
+	document.getElementById("util14").style.color = "#008b52"
+	document.getElementById("win14").style.color = "#008b52"
+	document.getElementById("kills14").style.color = "#008b52"
+{% endif %}
+
+	
+
+</script>
 
 
 {% endblock %}
