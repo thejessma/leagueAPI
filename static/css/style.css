@@ -9,28 +9,58 @@ body {
 
 .container{
 	color:#2C3E50;
+	width:80vw;
+	height:100vh;
+	position: absolute;
+	top:0;
+	right:-5vw;
+}
+
+.chart{
+	width:100%;
+	height:100%;
 }
 
 a{
 	text-decoration: none;
 }
 
+.index_col{
+	position: absolute;
+	top:50vh;
+	left:0;
+	width:33vw;
+	text-align: center;
+	z-index: 5;
+	transform: translateY(-50%);
+}
+
 .header{
 	font-weight: 100;
-	font-size: 3em;
-	margin-right:2vw;
-	margin-left:2vw;
-	margin-top:2vh;
+	font-size: 3.5em;
+	width:25vw;
 	text-align: center;
 	color: #2C3E50;
-
+	display: inline-block;
 }
 
 .about_button{
 	color:#b8b8b8;
 	transition: all 0.1s ease-in;
-	width:100%;
+	width:50px;
 	display: inline-block;
+	margin-top:3vh;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.window{
+	position: relative;
+	top:0;
+	left:0;
+	width:100vw;
+	height:100vh;
+	overflow: hidden;
 }
 
 .about_button:hover{
@@ -40,7 +70,10 @@ a{
 
 .toggle{
 	text-align: center;
-	margin-top:10px;
+	margin-top:30vh;
+	display: inline-block;
+	width:33vw;
+
 }
 
 .version{
@@ -48,8 +81,8 @@ a{
 	color:#545454;
 	padding-top:5px;
 	padding-bottom:5px;
-	padding-left:50px;
-	padding-right:50px;
+	padding-left:40px;
+	padding-right:40px;
 	display: inline-block;
 	transition: all 0.1s ease-in;
 }
@@ -68,6 +101,26 @@ a{
 .btn14{
 	border-radius: 0px 10px 10px 0px;
 	margin-left:-1px;
+}
+
+.legend{
+	opacity: 0.3;
+	font-size: 3em;
+	font-weight: 100;
+	position: absolute;
+	top:5vh;
+	right:28vw;
+}
+
+.ap_legend{
+	color: #ff50a6;
+}
+
+.util_legend{
+	color: #50a1ff;
+	transform: rotate(90deg);
+	right:1vw;
+	top:50vh;
 }
 
 
@@ -109,24 +162,24 @@ a{
 	top:0;
 	left:0;
 	width:100vw;
-	height:100vh;
+	height:50vh;
 	z-index: 1;
+	
 	background: -webkit-linear-gradient( #000, transparent)
-
 }
 
 .table_container{
-	margin-left:10vw;
-	margin-right:10vw;
-	width:80vw;
+	color:#333333;
+	width:100vw;
 	height:70vh;
 	display: inline-block;
 	position: absolute;
 	top:20vh;
 	left:0;
 	z-index: 1;
-	box-shadow: 0px 0px 2px 2px rgba(174, 174, 174, 0.4);
-	border-radius:10px;
+	box-shadow: 0px 0px 2px 2px rgba(230, 230, 230, 0.4);
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.9);
 }
 
 
@@ -134,10 +187,11 @@ a{
 	margin:0;
 	position: absolute;
 	top:0;
-	width:40vw;
+	width:50vw;
 	text-align: left;
 	margin-bottom:5vh;
 	height:70vh;
+
 }
 
 .about {
@@ -149,7 +203,6 @@ a{
 
 .col11{
 	left:0;
-	background-color: rgba(0, 0, 0, 0.80);
 	border-radius: 10px 0px 0px 10px;
 
 
@@ -162,7 +215,7 @@ a{
 
 .col14{
 	right:0;
-	background-color: rgba(0,0, 0, 0.80);
+
 	border-radius: 0px 10px 10px 0px;
 }
 
@@ -185,8 +238,9 @@ a{
 .col_content{
 	font-size: 1.5em;
 	margin-top:10vh;
-	margin-left:5vw;
+	margin-left:10vw;
 	margin-bottom:5vh;
+
 }
 
 .about_content{
@@ -212,6 +266,7 @@ a{
 	width:30vw;
 	text-align: left;
 	vertical-align: middle;
+	margin-top:20px;
 }
 
 .item{
@@ -250,5 +305,5 @@ a{
 }
 
 .back:hover{
-	color:#505050;
+	color:#333333;
 };

@@ -2,187 +2,237 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 
-<a href="{{ url_for('index') }}">
-<div class="header"> 
-	Ability vs. Utility Calculator
+<div class="window">
+
+	<div class="index_col">
+		<a href="{{ url_for('index') }}">
+		<div class="header"> 
+			Ability
+			vs.
+			Utility
+		</div>
+		</a>
+
+		
+
+
+		<div class="toggle">
+
+			<div id = "btn11" class="version btn11">
+
+		    	Patch 5.11
+
+		    </div><div id="btn14" class="version btn14">
+
+		    	Patch 5.14
+
+		    </div>
+
+		</div>
+
+		<a href="{{ url_for('about') }}">
+
+		<div class="about_button">
+
+			About
+
+		</div>
+		</a>
+
+
+		<span style="color:#b8b8b8">| </span>
+
+		<a href="mailto: houshihiwatari@gmail.com">
+		<div class="about_button">
+
+			Contact
+
+		</div>
+		</a>
+
+
+	</div>
+
+	<div class="container">
+
+		<div class="legend ap_legend">
+
+			High AP
+
+		</div>
+
+		<div class="legend util_legend">
+
+			High Utility
+
+		</div>
+
+	    <div id="chart_div" class="chart"></div>
+
+	</div>
+
 </div>
-</a>
-
-<a href="{{ url_for('about') }}">
-
-<div class="about_button">
-
-	About
-
-</div>
-
-</a>
 
 
-<div class="toggle">
 
-	<div id = "btn11" class="version btn11">
 
-    	Patch 5.11
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
 
-    </div><div id="btn14" class="version btn14">
+    var current = 0;
 
-    	Patch 5.14
+    function drawChart() {
 
-    </div>
+		var data = new Array(
+        	google.visualization.arrayToDataTable([
 
-</div>
+        		['ID', 'Utility', 'Ability Power', 'Build', 'Win', 'ID'],
 
-<div class="container">
+        		{% for k, v in indexDict11.iteritems() %}
+        			[ "{{ v['name'] }}", {{ v['coordinate']['x'] }}, {{ v['coordinate']['y']}}, "{{v['role']}}", {{v['win']}}, {{k}}],
+        		{% endfor %}
 
-    <div id="chart_div" style="display: inline-block; width: 900px; height: 500px;"></div>
+        	]),
 
-</div>
+        	google.visualization.arrayToDataTable([
 
-    <script type="text/javascript">
-	    google.load("visualization", "1", {packages:["corechart"]});
-	    google.setOnLoadCallback(drawChart);
+	        	['ID', 'Utility', 'Ability Power', 'Build', 'Win', "ID"],
 
-	    var current = 0;
+	        	{% for k, v in indexDict14.iteritems() %}
+	        		[ "{{ v['name'] }}", {{ v['coordinate']['x'] }}, {{ v['coordinate']['y']}}, "{{v['role']}}", {{v['win']}}, {{k}}],
+	        	{% endfor %}
 
-	    function drawChart() {
+        	]));
+        
+        var options = {
+        	hAxis: {title: 'Utility Units', minValue: 0, maxValue: 175},
+        	vAxis: {title: 'Ability Power', minValue: 0, maxValue: 350},
+        	legend: 'none',
+        	backgroundColor: 'transparent',
+        	animation: {
+            	duration: 1000,
+            	easing: "out"
+          	},
+          	tooltip: { isHtml: true },
+          	chartArea: {width: '100%', height: '100%'},
+          	sizeAxis: {minSize: 0.5, maxSize: 20},
+          	hAxis: {
+          		baselineColor: "transparent",
+          		gridlines: {
+          			count: 0
+          		},
+          	},
+          	vAxis: {
+          		baselineColor: "transparent",
+          		gridlines: {
+          			count: 0
+          		},
+          	},
+          	series: { "AP" : {color: '#ff50a6'}, "UTIL" : {color: '#50a1ff'}},
+          	bubble: {
+          		textStyle: {
+          			fontSize: 6,
+          			color:"#fff",
+          		},
+          		stroke: 'transparent'
+          	},
+          	tooltip: {
+          		textStyle: {
+          			color: "#000000",
+          			
+          		}
+          	}
+        };
 
-			var data = new Array(
-	        	google.visualization.arrayToDataTable([
+        var chart = new google.visualization.BubbleChart(document.getElementById('chart_div'));
+        var button11 = document.getElementById('btn11');
+        var button14 = document.getElementById('btn14');
 
-	        		['ID', 'Utility', 'Ability Power', 'Build', 'Win', 'ID'],
-
-	        		{% for k, v in indexDict11.iteritems() %}
-	        			[ "{{ v['name'] }}", {{ v['coordinate']['x'] }}, {{ v['coordinate']['y']}}, "{{v['role']}}", {{v['win']}}, {{k}}],
-	        		{% endfor %}
-
-	        	]),
-
-	        	google.visualization.arrayToDataTable([
-
-		        	['ID', 'Utility', 'Ability Power', 'Build', 'Win', "ID"],
-
-		        	{% for k, v in indexDict14.iteritems() %}
-		        		[ "{{ v['name'] }}", {{ v['coordinate']['x'] }}, {{ v['coordinate']['y']}}, "{{v['role']}}", {{v['win']}}, {{k}}],
-		        	{% endfor %}
-
-	        	]));
-	        
-	        var options = {
-	        	hAxis: {title: 'Utility Units', minValue: 0, maxValue: 175},
-	        	vAxis: {title: 'Ability Power', minValue: 0, maxValue: 350},
-	        	legend: 'none',
-	        	backgroundColor: 'transparent',
-	        	animation: {
-	            	duration: 1000,
-	            	easing: "out"
-	          	},
-	          	tooltip: { isHtml: true },
-	          	chartArea: {width: '80%', height: '75%'},
-	          	sizeAxis: {minSize: 0.5, maxSize: 20},
-	          	series: { "AP" : {color: '#ff50a6'}, "UTIL" : {color: '#50a1ff'}},
-	          	bubble: {
-	          		textStyle: {
-	          			fontSize: 6,
-	          			color:"#fff",
-	          		}
-	          	},
-	          	tooltip: {
-	          		textStyle: {
-	          			color: "#000000",
-	          			
-	          		}
-	          	}
-	        };
-
-	        var chart = new google.visualization.BubbleChart(document.getElementById('chart_div'));
-	        var button11 = document.getElementById('btn11');
-	        var button14 = document.getElementById('btn14');
-
-	       	function selectHandler() {
-	         	var champID = 0;
-			    var selection = chart.getSelection();
-			    for (var i = 0; i < selection.length; i++) {
-				   	var item = selection[i];
-				    champID = data[current].getValue(item.row, 5)
-				};
-				var url = "{{ url_for('champion_page', champion_id='champID') }}";
-				url = url.replace("champID", champID);
-				window.location.href = url;
+       	function selectHandler() {
+         	var champID = 0;
+		    var selection = chart.getSelection();
+		    for (var i = 0; i < selection.length; i++) {
+			   	var item = selection[i];
+			    champID = data[current].getValue(item.row, 5)
 			};
+			var url = "{{ url_for('champion_page', champion_id='champID') }}";
+			url = url.replace("champID", champID);
+			window.location.href = url;
+		};
 
-			google.visualization.events.addListener(chart, 'select', selectHandler);
-			google.visualization.events.addListener(chart, 'onmouseover', cursorHandler);
-			google.visualization.events.addListener(chart, 'onmouseout', cursorHandlerOff);
+		google.visualization.events.addListener(chart, 'select', selectHandler);
+		google.visualization.events.addListener(chart, 'onmouseover', cursorHandler);
+		google.visualization.events.addListener(chart, 'onmouseout', cursorHandlerOff);
 
-	        function drawAgain() {
-	        	button11.disabled = true;
-	          	button14.disabled = true;
-	          	google.visualization.events.addListener(chart, 'ready',
-	          	function() {
-	            	button11.disabled = false;
-	            	button14.disabled = false;
-	            });
-	          
-	        	chart.draw(data[current], options);
-	        };
-	        
-	        drawAgain();
+        function drawAgain() {
+        	button11.disabled = true;
+          	button14.disabled = true;
+          	google.visualization.events.addListener(chart, 'ready',
+          	function() {
+            	button11.disabled = false;
+            	button14.disabled = false;
+            });
+          
+        	chart.draw(data[current], options);
+        };
+        
+        drawAgain();
 
-	        function cursorHandler() {
-	        	console.log("print");
-	        	$("#chart_div").css('cursor', 'pointer')
-	        };
+        function cursorHandler() {
+        	console.log("print");
+        	$("#chart_div").css('cursor', 'pointer')
+        };
 
-	        function cursorHandlerOff() {
-	        	$("#chart_div").css('cursor', 'default')
-	        };
+        function cursorHandlerOff() {
+        	$("#chart_div").css('cursor', 'default')
+        };
 
-	        button14.onclick = function() {
-	         	current = 1;
-	          	clickButton(button14);
-	          	removeButton(button11)
-	        };
+        button14.onclick = function() {
+         	current = 1;
+          	clickButton(button14);
+          	removeButton(button11)
+        };
 
-	        button11.onclick = function() {
-	          	current = 0;
-	          	clickButton(button11);
-	          	removeButton(button14)
-	        };
+        button11.onclick = function() {
+          	current = 0;
+          	clickButton(button11);
+          	removeButton(button14)
+        };
 
-	        button14.hover = function() {
-	          	hoverButton(button14)
-	        }
+        button14.hover = function() {
+          	hoverButton(button14)
+        }
 
-	        button11.hover = function() {
-	          	hoverButton(button11)
-	        }
+        button11.hover = function() {
+          	hoverButton(button11)
+        }
 
-	        function clickButton(button) {
-	          	hoverButton(button)
-	          	drawAgain();
-	        }
+        function clickButton(button) {
+          	hoverButton(button)
+          	drawAgain();
+        }
 
-	    };
+    };
 
-	     
-	    function hoverButton(buttonDark) {
-	        buttonDark.style.background = '#545454'
-	        buttonDark.style.color = '#fff'
-	          
-	    };
+     
+    function hoverButton(buttonDark) {
+        buttonDark.style.background = '#545454'
+        buttonDark.style.color = '#fff'
+          
+    };
 
-	    function removeButton(buttonLight) {
-	        buttonLight.style.background = ''
-	        buttonLight.style.color = ''
-	    };
+    function removeButton(buttonLight) {
+        buttonLight.style.background = ''
+        buttonLight.style.color = ''
+    };
 
 
-	    function tooltipContent(name, kills, win, role) {
-	        return '<div class="tooltip">' + '<div class="tooltipHead">' + name + '</div>' + "Kills: " + kills + '</br>' + "Wins: " + win + '</br>' + "Role: " + role + '</div>' 
+    function tooltipContent(name, kills, win, role) {
+        return '<div class="tooltip">' + '<div class="tooltipHead">' + name + '</div>' + "Kills: " + kills + '</br>' + "Wins: " + win + '</br>' + "Role: " + role + '</div>' 
 
-	    };
+    };
 
-    </script>
+</script>
 
 {% endblock %}
