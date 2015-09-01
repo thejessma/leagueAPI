@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %} - About {% endblock %}
+{% block content %}
+
+<div class="champion_page">
+
+
+	<div class="champion_bkgd">
+		<img class="champion_img" src="http://na.leagueoflegends.com/sites/default/files/styles/scale_large/public/upload/art/teamfight1.jpg?itok=RY8MP2B2">
+
+		<a href="{{ url_for('index') }}">
+		<div class="back">
+			Back
+		</div>
+		</a>
+		<div class="champion_title">
+			About
+		</div>
+		<div class="bkgd_overlay">
+
+		</div>
+	</div>
+
+	<div class="table_container">
+
+		<div class="table_col about">
+
+			<div class="col_title  title11"> 
+				Ability vs. Utility
+			</div>
+
+			<div class="about_item_container">
+				{% for i in range(itemImg | length) %}<div class="item about_item">
+
+					<img class="item_img" src="{{ itemImg[i] }}">
+
+
+				</div>{% endfor %}
+			</div>
+
+			<div class="col_content about_content">
+
+				With the AP Item change in Patch 5.13, many AP players significantly changed their build strategies. Specifically, these changes saw to alterations in the AP value and to the introduction of new spells and passives. Instead of purely maximizing AP, players could change their play style to include new utilities. The Ability vs. Utility application focuses on champions using these AP items before and after the change, tracking these play style changes by looking at the average AP and Utility of item builds. All data shown is measured through the use of these specific AP Items. We measure Utility by its value in gold relative to the gold value of AP points and characterize styles as AP or UTIL based on which type of build the player is trying to optimize for.<br><br>
+
+				The main application graph illustrates these changes. We note that a few new champions began heavily adopting these items in 5.14 (Utility style). A handful of champions switch from one build style to the other. For champions that used to rely on these items for maximizing utility, there is a general shift away from using these items and instead adopting other items. Perhaps most importantly, the new build styles seem to reduce the variance amongst win rates. Champions that used to have a egregiously high or low win rate now have a win rate much closer to 50%.
+
+				<div class="foot_content">
+
+					Ability vs. Utility is not endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+{% endblock %}

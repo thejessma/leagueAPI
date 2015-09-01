@@ -264,11 +264,11 @@ def champion_page(champion_id):
 	championImg = "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + str(championData["key"]) + "_0.jpg"
 	itemImg11 = []
 	itemImg14 = []
-	for i in range(min(5, len(indexDict14[champion_id]["items"]))):
+	for i in range(min(7, len(indexDict14[champion_id]["items"]))):
 		itemImg14.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict14[champion_id]["items"][i]["item"]) + ".png")
 		
 	if champion_id in indexDict11:
-		for i in range(min(5, len(indexDict14[champion_id]["items"]))):
+		for i in range(min(7, len(indexDict14[champion_id]["items"]))):
 			itemImg11.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(indexDict11[champion_id]["items"][i]["item"]) + ".png")
 		return render_template('champion_page.html', indexDict11 = indexDict11[champion_id], indexDict14 = indexDict14[champion_id], championImg = championImg, itemImg11 = itemImg11, itemImg14 = itemImg14)
 	else:
@@ -277,6 +277,13 @@ def champion_page(champion_id):
 @app.route("/riot.txt")
 def riot():
 	return render_template("riot.txt")
+
+@app.route("/about")
+def about():
+	itemImg = []
+	for i in range(len(idAPItem)):
+		itemImg.append("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + str(idAPItem[i]) + ".png")
+	return render_template("about.html", itemImg = itemImg)
 
 #----------------------------------------
 # launch

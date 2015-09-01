@@ -4,28 +4,23 @@ import time
 
 matchID = []
 
-with open("EUW11N.json", "r") as f:
+with open("EUWSOLO14.json", "r") as f:
 	data = f.read()
 	matchID = json.loads(data)
 	f.close()
 
-matchDataFile = open("matchDataFile-EUW11N.json", "w")
+matchDataFile = open("matchDataFile-EUW14S.json", "w")
 
 matchIDString = map(str, matchID)
 
 matchData = []
 
 for i in range(0, len(matchID)):
-	index = 0
-	if i % 10 == 0:
-		time.sleep(12)
-
-	print "request: " +  str(i)
 
 	success = False
 	for j in range(20):
 		try: 
-			matchData.append(json.load(urllib2.urlopen("https://euw.api.pvp.net/api/lol/euw/v2.2/match/" + matchIDString[i] + "?api_key=98d79efb-f067-465a-b246-50c65eac27e8")))
+			matchData.append(json.load(urllib2.urlopen("https://euw.api.pvp.net/api/lol/euw/v2.2/match/" + matchIDString[i] + "?api_key=94cfaa23-27dd-42a0-9434-6cbbdbd6b42a")))
 			success = True
 			break		
 		except urllib2.HTTPError, err:
@@ -39,10 +34,9 @@ for i in range(0, len(matchID)):
 
 
 
-	matchDataFile.write(json.dumps(matchData[index]))
+	matchDataFile.write(json.dumps(matchData[i]))
 	matchDataFile.write(", ")
 	matchDataFile.write("\n")
-	index += 1
 
 matchDataFile.close()
 

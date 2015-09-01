@@ -26,9 +26,21 @@ a{
 
 }
 
+.about_button{
+	color:#b8b8b8;
+	transition: all 0.1s ease-in;
+	width:100%;
+	display: inline-block;
+}
+
+.about_button:hover{
+	color: #2C3E50;
+	cursor: pointer;
+}
+
 .toggle{
 	text-align: center;
-	margin-top:20px;
+	margin-top:10px;
 }
 
 .version{
@@ -128,6 +140,13 @@ a{
 	height:70vh;
 }
 
+.about {
+	width:80vw;
+	border-radius: 10px 10px 10px 10px;
+	background-color: rgba(0, 0, 0, 0.80);
+	left:0;
+}
+
 .col11{
 	left:0;
 	background-color: rgba(0, 0, 0, 0.80);
@@ -170,6 +189,17 @@ a{
 	margin-bottom:5vh;
 }
 
+.about_content{
+	width:70vw;
+	font-size:0.9em;
+	margin-top:20px;
+}
+
+.foot_content{
+	font-size: 0.75em;
+	margin-top:50px;
+}
+
 .col_table{
 	width:30vw;
 }
@@ -187,6 +217,13 @@ a{
 .item{
 	display: inline-block;
 	vertical-align: middle;
+}
+
+
+
+.about_item_container{
+	margin-top:20px;
+	text-align: center;
 }
 
 .item_img{
