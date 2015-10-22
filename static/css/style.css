@@ -194,11 +194,16 @@ a{
 
 }
 
+.about_container {
+	width:100vw;
+	text-align: center;
+}
+
 .about {
 	width:80vw;
 	border-radius: 10px 10px 10px 10px;
-	background-color: rgba(0, 0, 0, 0.80);
 	left:0;
+	text-align: center
 }
 
 .col11{
@@ -244,9 +249,10 @@ a{
 }
 
 .about_content{
-	width:70vw;
+	margin:10px 100px 10px 100px;
 	font-size:0.9em;
-	margin-top:20px;
+	display: inline-block;
+	text-align: left;
 }
 
 .foot_content{
@@ -279,6 +285,7 @@ a{
 .about_item_container{
 	margin-top:20px;
 	text-align: center;
+	display: inline-block;
 }
 
 .item_img{

@@ -4,12 +4,12 @@ import time
 
 matchID = []
 
-with open("EUWSOLO14.json", "r") as f:
+with open("EUW5514.json", "r") as f:
 	data = f.read()
 	matchID = json.loads(data)
 	f.close()
 
-matchDataFile = open("matchDataFile-EUW14S.json", "w")
+matchDataFile = open("matchDataFile-EUW14N.json", "w")
 
 matchIDString = map(str, matchID)
 
